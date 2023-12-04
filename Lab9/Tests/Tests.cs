@@ -1,39 +1,26 @@
 ﻿using Lab9.Pages;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace Lab9.Tests
 {
-    public class Tests
+    public class Tests : CommonConditions
     {
-        IWebDriver? driver;
-
-        [SetUp]
-        public void ChromeBrowserStart()
-        {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-        }
-
-        /*[Test]
+        [Test]
         public void TestCountOfGoodsInShoppingBasket()
         {
-            if (driver == null)
-            {
-                Assert.Fail("Driver not found!");
-            }
-
             int countOfProducts = new OnlinerHomePage(driver)
                 .OpenPage()
+                .OpenNotebooksPage()
+                .OpenNotebookItemPage()
+                .AddItemToCard()
                 .OpenShoppingCard()
                 .InputItemsCount(1000)
                 .CountItemsResultNumber();
 
             Assert.IsTrue(countOfProducts < 100);
-        }*/
+        }
 
-        [Test]
+        /*[Test]
         public void PositiveTestSearch()
         {
             if (driver == null)
@@ -46,15 +33,7 @@ namespace Lab9.Tests
                 .SearchItem("chair")
                 .NumberOfFoundProducts();
 
-            Console.WriteLine(numberOfFoundProducts);
-
             Assert.True(numberOfFoundProducts > 0);
-        }
-
-        [TearDown]
-        public void ChromeBrowserStop()
-        {
-            driver?.Quit();
-        }
+        }*/
     }
 }
