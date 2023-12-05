@@ -23,11 +23,6 @@ namespace Lab9.Tests
         [Test]
         public void PositiveTestSearch()
         {
-            if (driver == null)
-            {
-                Assert.Fail("Driver not found!");
-            }
-
             int numberOfFoundProducts = new OnlinerSearchPage(driver)
                 .OpenPage()
                 .SearchItem("chair")
