@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace Lab9.Pages
 {
@@ -15,6 +16,8 @@ namespace Lab9.Pages
 
         public NotebookItemPage OpenNotebookItemPage()
         {
+            _ = new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(driver => { return NotebookItemLink; });
+
             NotebookItemLink.Click();
 
             return new NotebookItemPage(driver);

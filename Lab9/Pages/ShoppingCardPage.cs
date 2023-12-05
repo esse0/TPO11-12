@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-
+using OpenQA.Selenium.Support.UI;
 
 namespace Lab9.Pages
 {
@@ -14,6 +14,8 @@ namespace Lab9.Pages
 
         public ShoppingCardPage InputItemsCount(int count)
         {
+            _ = new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(driver => { return ShoppingCardCountField; });
+
             ShoppingCardCountField.SendKeys($"{count}");
             return this;
         }

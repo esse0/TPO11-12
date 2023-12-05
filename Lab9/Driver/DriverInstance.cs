@@ -33,7 +33,6 @@ namespace Lab9.Driver
                 }
             }
 
-            driver?.Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(30));
             driver?.Manage().Window.Maximize();
 
             return driver;

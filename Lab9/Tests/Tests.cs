@@ -20,7 +20,7 @@ namespace Lab9.Tests
             Assert.IsTrue(countOfProducts < 100);
         }
 
-        /*[Test]
+        [Test]
         public void PositiveTestSearch()
         {
             if (driver == null)
@@ -34,6 +34,6 @@ namespace Lab9.Tests
                 .NumberOfFoundProducts();
 
             Assert.True(numberOfFoundProducts > 0);
-        }*/
+        }
     }
 }

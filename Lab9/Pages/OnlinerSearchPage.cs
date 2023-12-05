@@ -1,44 +1,47 @@
 ﻿using OpenQA.Selenium;
-using System.Collections.ObjectModel;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 
 namespace Lab9.Pages
 {
     public class OnlinerSearchPage : PageObject
     {
-        private const string HOMEPAGE_URL = "https://www.onliner.by/";
+        private const string ONLINERSEARCH_URL = "https://catalog.onliner.by/sdapi/catalog/search/iframe";
 
         private IWebElement? SearchBar
         {
-            get => driver?.FindElement(By.XPath("//*[@class=\"fast-search__input\"]"));
+            get => driver?.FindElement(By.XPath("//input[@class=\"search__input\"]"));
         }
 
-        private ReadOnlyCollection<IWebElement>? SearchResult
+        private By SearchResultBy
         {
-            get => driver?.FindElements(By.XPath("//*[@class=\"search__result\"]"));
+            get => By.XPath("//ul[@class=\"search__results\"]//li");
         }
 
-        public OnlinerSearchPage(IWebDriver? driver) : base(driver)
-        {
-            driver.Manage().Timeouts().PageLoad = new TimeSpan(0, 0, 20);
-            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 30);
-        }
+        public OnlinerSearchPage(IWebDriver? driver) : base(driver) { }
 
         public override OnlinerSearchPage OpenPage()
         {
-            driver.Navigate().GoToUrl(HOMEPAGE_URL);
+            driver.Navigate().GoToUrl(ONLINERSEARCH_URL);
             return this;
         }
 
         public OnlinerSearchPage SearchItem(string itemName)
         {
-            SearchBar.SendKeys(itemName);
+            _ = new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(driver => { return SearchBar; });
+
+            SearchBar?.SendKeys(itemName);
+
             return this;
         }
 
         public int NumberOfFoundProducts()
         {
-            return SearchResult.Count;
+            var result = new WebDriverWait(driver, TimeSpan.FromSeconds(15))
+                .Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(SearchResultBy));
+
+            return result.Count;
         }
     }
 }
