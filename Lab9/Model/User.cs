@@ -1,5 +1,4 @@
-﻿
-namespace Lab9.Model
+﻿namespace Lab9.Model
 {
     public class User
     {

@@ -14,7 +14,7 @@ namespace Lab9.Pages
             get => driver?.FindElement(By.XPath("//input[@class=\"search__input\"]"));
         }
 
-        private By SearchResultBy
+        private By SearchResultPath
         {
             get => By.XPath("//ul[@class=\"search__results\"]//li");
         }
@@ -38,10 +38,10 @@ namespace Lab9.Pages
 
         public int NumberOfFoundProducts()
         {
-            var result = new WebDriverWait(driver, TimeSpan.FromSeconds(15))
-                .Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(SearchResultBy));
+            var searchResult = new WebDriverWait(driver, TimeSpan.FromSeconds(15))
+                .Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(SearchResultPath));
 
-            return result.Count;
+            return searchResult.Count;
         }
     }
 }
